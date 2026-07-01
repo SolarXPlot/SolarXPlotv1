@@ -1,421 +1,743 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOLARXPLOT - Photovoltaic Data Visualization</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-bg: #f8f9fa;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-        
-        .navbar {
-            background-color: var(--primary-color) !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .navbar-brand {
-            font-weight: 700;
-            color: white !important;
-            font-size: 1.5rem;
-        }
-        
-        .nav-link {
-            color: rgba(255,255,255,0.85) !important;
-            font-weight: 500;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-        
-        .nav-link:hover {
-            color: var(--secondary-color) !important;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 100px 0;
-            margin-bottom: 50px;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .btn-download {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            border: none;
-        }
-        
-        .btn-download:hover {
-            background-color: #c0392b;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            color: white;
-        }
-        
-        .section-title {
-            position: relative;
-            margin-bottom: 50px;
-            text-align: center;
-        }
-        
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 70px;
-            height: 4px;
-            background: var(--secondary-color);
-            margin: 15px auto 0;
-        }
-        
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            height: 100%;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-        
-        .download-section {
-            background-color: var(--light-bg);
-            padding: 80px 0;
-        }
-        
-        .download-card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            height: 100%;
-        }
-        
-        .download-icon {
-            font-size: 3rem;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-        
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 30px 0;
-            margin-top: 80px;
-        }
-        
-        .sub-section {
-            margin-top: 40px;
-            padding: 30px;
-            background: var(--light-bg);
-            border-radius: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>SolarXPlot | Advanced Photovoltaic Analysis</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+font-family:Segoe UI,sans-serif;
+
+background:
+linear-gradient(
+180deg,
+#050816,
+#081121,
+#090d1f
+);
+
+color:white;
+overflow-x:hidden;
+}
+
+
+/* =====================
+NAVBAR
+===================== */
+
+.navbar{
+
+background:rgba(10,10,30,.4);
+
+backdrop-filter:blur(15px);
+
+border-bottom:
+1px solid rgba(255,255,255,.08);
+}
+
+.navbar-brand{
+
+font-size:1.8rem;
+font-weight:700;
+
+background:
+linear-gradient(
+90deg,
+#FFD84D,
+#5C7CFF
+);
+
+-webkit-background-clip:text;
+color:transparent;
+}
+
+
+/* =====================
+BACKGROUND
+===================== */
+
+
+.background{
+
+position:fixed;
+
+width:100%;
+height:100%;
+
+top:0;
+left:0;
+
+overflow:hidden;
+
+z-index:-3;
+}
+
+
+/* sun */
+
+.sun{
+
+position:absolute;
+
+width:300px;
+height:300px;
+
+border-radius:50%;
+
+right:-100px;
+top:-50px;
+
+background:
+
+radial-gradient(
+circle,
+#FFD84D,
+#FF9800,
+transparent
+);
+
+filter:blur(20px);
+
+animation:pulse 5s infinite;
+}
+
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.1);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+
+/* glowing orbs */
+
+.orb{
+
+position:absolute;
+
+border-radius:50%;
+
+filter:blur(90px);
+
+opacity:.4;
+}
+
+
+.orb1{
+
+width:300px;
+height:300px;
+
+background:#5C7CFF;
+
+left:-100px;
+top:30%;
+}
+
+
+.orb2{
+
+width:350px;
+height:350px;
+
+background:#a855f7;
+
+right:-100px;
+bottom:0;
+}
+
+
+/* spotlight */
+
+#spotlight{
+
+position:fixed;
+
+width:500px;
+height:500px;
+
+pointer-events:none;
+
+background:
+
+radial-gradient(
+circle,
+rgba(92,124,255,.2),
+transparent 70%
+);
+
+transform:translate(-50%,-50%);
+
+z-index:-1;
+}
+
+
+/* =====================
+HERO
+===================== */
+
+.hero{
+
+min-height:100vh;
+
+display:flex;
+
+align-items:center;
+}
+
+
+.hero h1{
+
+font-size:4rem;
+font-weight:800;
+}
+
+.gradient-text{
+
+background:
+linear-gradient(
+90deg,
+#FFD84D,
+#5C7CFF,
+#C77DFF
+);
+
+-webkit-background-clip:text;
+color:transparent;
+}
+
+
+.hero p{
+
+color:#c9c9c9;
+font-size:1.2rem;
+line-height:1.8;
+}
+
+
+.hero-logo{
+
+width:450px;
+
+animation:float 5s infinite ease-in-out;
+
+filter:
+drop-shadow(
+0 0 30px
+rgba(92,124,255,.7)
+);
+
+transition:1s;
+}
+
+
+@keyframes float{
+
+0%,100%{
+
+transform:
+translateY(0)
+rotateY(0deg);
+
+}
+
+50%{
+
+transform:
+translateY(-25px)
+rotateY(15deg);
+
+}
+
+}
+
+
+/* =====================
+BUTTONS
+===================== */
+
+.btn-custom{
+
+padding:14px 35px;
+
+border-radius:40px;
+
+border:none;
+
+font-weight:700;
+
+background:
+linear-gradient(
+90deg,
+#5C7CFF,
+#C77DFF
+);
+
+color:white;
+
+transition:.5s;
+}
+
+
+.btn-custom:hover{
+
+transform:
+translateY(-4px)
+scale(1.03);
+
+box-shadow:
+0 0 25px
+#5C7CFF;
+}
+
+
+/* =====================
+CARDS
+===================== */
+
+.feature-card{
+
+height:100%;
+
+padding:40px;
+
+border-radius:25px;
+
+background:
+
+rgba(255,255,255,.06);
+
+backdrop-filter:blur(20px);
+
+border:
+
+1px solid rgba(255,255,255,.1);
+
+transform-style:preserve-3d;
+
+transition:.3s;
+
+cursor:pointer;
+}
+
+
+.feature-card h3{
+
+margin-top:20px;
+}
+
+.feature-icon{
+
+font-size:3rem;
+
+color:#FFD84D;
+}
+
+
+section{
+
+padding:100px 0;
+}
+
+
+/* =====================
+STATS
+===================== */
+
+.stats{
+
+text-align:center;
+}
+
+.stats h1{
+
+font-size:3rem;
+
+font-weight:800;
+
+color:#FFD84D;
+}
+
+
+/* =====================
+FOOTER
+===================== */
+
+footer{
+
+padding:40px;
+
+background:rgba(0,0,0,.3);
+
+text-align:center;
+
+border-top:
+1px solid rgba(255,255,255,.1);
+}
+
+</style>
+
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">SOLARXPLOT</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#features">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#download">Download</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#jv-plot">J-V Plot</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#xrd-plot">XRD Plot</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#eqe-plot">EQE Plot</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h1>SOLARXPLOT</h1>
-                    <p>A powerful tool for visualizing and analyzing photovoltaic device metrics with precision and ease. Streamline your solar cell research with our intuitive interface and comprehensive analysis features.</p>
-                    <a href="#download" class="btn btn-download me-3">Download Now</a>
-                    <a href="#features" class="btn btn-outline-light">Learn More</a>
-                </div>
-                <div class="col-lg-4">
-                    <img src="SolarPlot_Icon.png" alt="SOLARXPLOT Visualization" class="img-fluid rounded shadow">
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="container py-5" id="features">
-        <h2 class="section-title">Key Features</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-lightning-charge"></i>
-                    </div>
-                    <h3>J-V Analysis</h3>
-                    <p>Comprehensive current-voltage characteristic analysis with automatic parameter extraction including Jsc, Voc, FF, and PCE.</p>
-                    <div class="text-center mt-3">
-                        <a href="J-V Sample Data.csv" class="btn btn-sm btn-outline-primary" download>
-                            <i class="bi bi-download me-1"></i> Download Sample J-V Data
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-graph-up"></i>
-                    </div>
-                    <h3>XRD Visualization</h3>
-                    <p>Advanced X-ray diffraction pattern analysis with peak identification and phase analysis capabilities.</p>
-                    <div class="text-center mt-3">
-                        <a href="Perovskite_XRD_sample_data.txt" class="btn btn-sm btn-outline-primary" download>
-                            <i class="bi bi-download me-1"></i> Download Sample XRD Data
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-brightness-high"></i>
-                    </div>
-                    <h3>EQE Analysis</h3>
-                    <p>External quantum efficiency measurements with spectral response analysis and bandgap determination.</p>
-                    <div class="text-center mt-3">
-                        <a href="eqe_data.txt" class="btn btn-sm btn-outline-primary" download>
-                            <i class="bi bi-download me-1"></i> Download Sample EQE Data
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="background">
 
-    <!-- Download Section -->
-    <section class="download-section" id="download">
-        <div class="container">
-            <h2 class="section-title text-dark">Download SOLARXPLOT</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-5 mb-4">
-                    <div class="download-card">
-                        <div class="download-icon">
-                            <i class="bi bi-download"></i>
-                        </div>
-                        <h3>Software Download</h3>
-                        <p>Get the latest version of SOLARXPLOT for Windows.</p>
-                        <a href="https://drive.google.com/file/d/1w49vnohlamSl2-U69XrhmXzona0ZaeTt/view?usp=sharing" class="btn btn-primary btn-lg mt-3" download>
-                            <i class="bi bi-download me-2"></i> Download v2.0
-                        </a>
-                        <p class="text-muted mt-2 small">File size: ~121MB</p>
-                    </div>
-                </div>
-                <div class="col-md-5 mb-4">
-                    <div class="download-card">
-                        <div class="download-icon">
-                            <i class="bi bi-file-earmark-pdf"></i>
-                        </div>
-                        <h3>User Manual</h3>
-                        <p>Download the comprehensive user manual in PDF format.</p>
-                        <a href="SOLARXPLOT_User_Manual.md" class="btn btn-outline-secondary btn-lg mt-3" download>
-                            <i class="bi bi-download me-2"></i> Download Manual
-                        </a>
-                        <p class="text-muted mt-2 small">PDF, ~2MB</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="sun"></div>
 
-    <!-- J-V Plot Section -->
-    <section class="container py-5" id="jv-plot">
-        <h2 class="section-title">J-V Plot Analysis</h2>
-        <p class="text-center mb-5">Advanced current-voltage characteristic analysis for photovoltaic devices.</p>
-        
-        <div class="sub-section">
-            <h3><i class="bi bi-lightning me-2"></i>Short-Circuit Current Density (J<sub>sc</sub>)</h3>
-            <p>Automatically extract and analyze short-circuit current density from your J-V measurements. Our software provides accurate determination of J<sub>sc</sub> across multiple devices or conditions.</p>
-            <img src="JV PLOT_subsection.png" alt="Jsc Analysis" class="img-fluid rounded my-3">
-        </div>
-        
-        <div class="sub-section mt-4">
-            <h3><i class="bi bi-lightning-charge me-2"></i>Open-Circuit Voltage (V<sub>oc</sub>)</h3>
-            <p>Precise determination of open-circuit voltage with advanced curve fitting techniques. Visualize and compare V<sub>oc</sub> values across multiple devices or conditions.</p>
-            <img src="JV PLOT_subsection.png" alt="Voc Analysis" class="img-fluid rounded my-3">
-        </div>
-        
-        <div class="sub-section mt-4">
-            <h3><i class="bi bi-percent me-2"></i>Fill Factor (FF)</h3>
-            <p>Calculate fill factor with high accuracy. Our software accounts to provide reliable FF values for your photovoltaic devices.</p>
-            <img src="JV PLOT_subsection.png" alt="FF Analysis" class="img-fluid rounded my-3">
-        </div>
-        
-        <div class="sub-section mt-4">
-            <h3><i class="bi bi-graph-up-arrow me-2"></i>Power Conversion Efficiency (PCE)</h3>
-            <p>Comprehensive efficiency analysis with automatic calculation of power conversion efficiency. Compare performance across different device architectures and measurement conditions.</p>
-            <img src="JV PLOT_subsection.png" alt="PCE Analysis" class="img-fluid rounded my-3">
-        </div>
-    </section>
+<div class="orb orb1"></div>
 
-    <!-- XRD Plot Section -->
-    <section class="py-5 bg-light" id="xrd-plot">
-        <div class="container">
-            <h2 class="section-title">XRD Plot Analysis</h2>
-            <p class="text-center mb-5">Advanced X-ray diffraction pattern analysis for material characterization.</p>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <h3><i class="bi bi-brightness-high me-2"></i>Peak Identification</h3>
-                    <p>Automatically identify and label diffraction peaks in your XRD patterns. Our software includes a comprehensive database of common photovoltaic materials for phase identification.</p>
-                    <ul class="list-group list-group-flush mb-4">
-                        <li class="list-group-item bg-transparent">Automatic graph visualisation</li>
-                        <li class="list-group-item bg-transparent">Real-time plot changes with raw data comparison and export clean data file</li>
-                        <li class="list-group-item bg-transparent">Visualise with and without baseline</li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <div class="ratio ratio-16x9">
-                        <iframe src="https://www.youtube.com/embed/U_Rwv-lZkZo"
-                            title="YouTube video player" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen 
-                            class="rounded shadow">
-                        </iframe>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="orb orb2"></div>
 
-    <!-- EQE Plot Section -->
-    <section class="py-5" id="eqe-plot">
-        <div class="container">
-            <h2 class="section-title">EQE Analysis</h2>
-            <p class="text-center mb-5">External Quantum Efficiency measurements for comprehensive device characterization.</p>
-            
-            <div class="row align-items-center">
-                <div class="col-md-6 order-md-2">
-                    <h3><i class="bi bi-sun me-2"></i>Spectral Response</h3>
-                    <p>Analyze the spectral response of your photovoltaic devices with high precision. Our software provides tools for:</p>
-                    <ul class="list-group list-group-flush mb-4">
-                        <li class="list-group-item bg-transparent">Wavelength-dependent EQE calculation</li>
-                        <li class="list-group-item bg-transparent">Effiecient and easy plotting</li>
-                        <li class="list-group-item bg-transparent">Current density integration</li>
-                    </ul>
-                </div>
-                <div class="col-md-6 order-md-1">
-                    <img src="EQE Plot-solarxplot.png" alt="EQE Analysis" class="img-fluid rounded shadow">
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>SOLARXPLOT</h5>
-                    <p>Advanced photovoltaic data visualization and analysis software for researchers and engineers.</p>
-                </div>
-                <div class="col-md-3">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#home" class="text-white">Home</a></li>
-                        <li><a href="#features" class="text-white">Features</a></li>
-                        <li><a href="#download" class="text-white">Download</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h5>Contact</h5>
-                    <ul class="list-unstyled">
-                        <li><i class="bi bi-envelope me-2"></i> solarxanalysis@gmail.com</li>
-                        <li><i class="bi bi-github me-2"></i> https://github.com/SolarXPlot</li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="mt-4 bg-light">
-            <div class="text-center">
-                <p class="mb-0">&copy; 2025 SOLARXPLOT. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+<div id="spotlight"></div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Manual download button handler
-        document.getElementById('manual-download').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Please upload your manual file and update the link in the HTML.');
-        });
-    </script>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+<div class="container">
+
+<a class="navbar-brand">
+SOLARXPLOT
+</a>
+
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link text-light" href="#features">
+Features
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link text-light" href="#download">
+Download
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</nav>
+
+
+<section class="hero">
+
+<div class="container">
+
+<div class="row align-items-center">
+
+<div class="col-lg-6">
+
+<h1>
+
+<span class="gradient-text">
+SOLARXPLOT
+</span>
+
+</h1>
+
+<br>
+
+<p>
+
+Advanced photovoltaic analysis and scientific visualization platform designed for researchers and engineers.
+
+Visualize J-V plots, XRD patterns, EQE analysis and advanced solar metrics in a beautiful research environment.
+
+</p>
+
+<br>
+
+<button class="btn-custom">
+
+Download Software
+
+</button>
+
+</div>
+
+
+<div class="col-lg-6 text-center">
+
+<img
+src="SolarPlot_Icon.png"
+class="hero-logo">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section id="features">
+
+<div class="container">
+
+<h1 class="text-center mb-5">
+
+Features
+
+</h1>
+
+<div class="row g-4">
+
+
+<div class="col-md-4">
+
+<div class="feature-card">
+
+<i class="bi bi-lightning-charge feature-icon"></i>
+
+<h3>J-V Analysis</h3>
+
+<p>
+
+Automatic extraction of Voc,
+Jsc, FF and PCE.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="feature-card">
+
+<i class="bi bi-bar-chart feature-icon"></i>
+
+<h3>XRD Visualization</h3>
+
+<p>
+
+Interactive diffraction analysis with real-time plotting.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="feature-card">
+
+<i class="bi bi-sun feature-icon"></i>
+
+<h3>EQE Analysis</h3>
+
+<p>
+
+Spectral response and efficiency analysis.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="stats">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-4">
+
+<h1>50K+</h1>
+<p>Plots Generated</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h1>100+</h1>
+<p>Research Labs</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h1>99%</h1>
+<p>Accuracy</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="download">
+
+<div class="container text-center">
+
+<h1>
+
+Download SolarXPlot
+
+</h1>
+
+<br>
+
+<button class="btn-custom">
+
+Download v2.0
+
+</button>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<h5>
+
+SOLARXPLOT
+
+</h5>
+
+<p>
+
+Advanced photovoltaic visualization software
+
+</p>
+
+</footer>
+
+
+
+<script>
+
+const spotlight=document.getElementById(
+"spotlight"
+);
+
+document.addEventListener(
+"mousemove",
+e=>{
+
+spotlight.style.left=
+e.clientX+"px";
+
+spotlight.style.top=
+e.clientY+"px";
+
+});
+
+
+
+document
+.querySelectorAll(".feature-card")
+.forEach(card=>{
+
+card.addEventListener(
+"mousemove",
+e=>{
+
+let rect=
+card.getBoundingClientRect();
+
+let x=
+e.clientX-
+rect.left;
+
+let y=
+e.clientY-
+rect.top;
+
+let rotateX=
+-(y-rect.height/2)/10;
+
+let rotateY=
+(x-rect.width/2)/10;
+
+card.style.transform=
+
+`
+perspective(1000px)
+rotateX(${rotateX}deg)
+rotateY(${rotateY}deg)
+scale(1.05)
+`;
+
+});
+
+
+card.addEventListener(
+"mouseleave",
+()=>{
+
+card.style.transform=
+`
+perspective(1000px)
+rotateX(0deg)
+rotateY(0deg)
+`;
+
+});
+
+});
+
+</script>
+
+
 </body>
 </html>
