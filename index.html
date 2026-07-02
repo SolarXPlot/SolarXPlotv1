@@ -9,58 +9,66 @@
     <style>
 
     :root{
-    --bg:#030712;
-    --bg2:#081427;
-    --glass:rgba(255,255,255,.08);
-    --glassBorder:rgba(255,255,255,.12);
 
+    --yellow:#FFD84D;
     --blue:#5C7CFF;
     --purple:#A855F7;
-    --yellow:#FFD84D;
     --cyan:#00E5FF;
+
+    --glass:
+    rgba(255,255,255,.07);
+
     }
 
+
     *{
+
     margin:0;
     padding:0;
     box-sizing:border-box;
+
     }
+
+
+    html{
+
+    scroll-behavior:smooth;
+
+    }
+
 
     body{
 
     font-family:'Segoe UI',sans-serif;
-    overflow-x:hidden;
-    color:white;
-    position:relative;
 
     background:
-    radial-gradient(
-    circle at top right,
-    rgba(255,216,77,.18),
-    transparent 30%
-    ),
-
-    radial-gradient(
-    circle at bottom left,
-    rgba(92,124,255,.15),
-    transparent 30%
-    ),
 
     linear-gradient(
-    180deg,
-    #030712,
-    #081427,
-    #091A2D
+    135deg,
+    #020617,
+    #071328,
+    #091e3d
     );
+
+    overflow-x:hidden;
+
+    color:white;
+
+    position:relative;
 
     }
 
 
-    /* animated background container */
+    /*=====================
 
-    .bg-animation{
+    Animated background
+
+    =====================*/
+
+    .solar-bg{
 
     position:fixed;
+
     top:0;
     left:0;
 
@@ -69,75 +77,211 @@
 
     overflow:hidden;
 
-    z-index:-2;
-    pointer-events:none;
+    z-index:-10;
+
     }
 
 
-    /* floating photovoltaic particles */
-
-    .particle{
+    .sun-glow{
 
     position:absolute;
+
+    width:600px;
+    height:600px;
+
+    right:-200px;
+    top:-100px;
+
     border-radius:50%;
-    opacity:.5;
+
+    background:
+
+    radial-gradient(
+
+    circle,
+
+    rgba(255,216,77,.35),
+
+    transparent 70%
+
+    );
+
+    filter:blur(80px);
+
+    animation:pulse 8s infinite;
+
+    }
+
+
+    @keyframes pulse{
+
+    50%{
+
+    transform:
+    scale(1.2);
+
+    }
+
+    }
+
+
+    /* spectral waves */
+
+    .wave{
+
+    position:absolute;
+
+    width:250%;
+
+    height:180px;
+
+    opacity:.1;
+
+    background:
+
+    repeating-radial-gradient(
+
+    circle,
+
+    #00E5FF 0px,
+
+    #00E5FF 2px,
+
+    transparent 6px,
+
+    transparent 50px
+
+    );
+
+    }
+
+
+    .wave1{
+
+    bottom:15%;
 
     animation:
-    floatParticle linear infinite;
-    }
+    moveWave 25s linear infinite;
 
-    .p1{
-
-    width:10px;
-    height:10px;
-
-    background:#FFD84D;
-
-    left:10%;
-    animation-duration:18s;
-    }
-
-    .p2{
-
-    width:8px;
-    height:8px;
-
-    background:#5C7CFF;
-
-    left:35%;
-    animation-duration:25s;
-    }
-
-    .p3{
-
-    width:14px;
-    height:14px;
-
-    background:#00E5FF;
-
-    left:60%;
-    animation-duration:20s;
-    }
-
-    .p4{
-
-    width:6px;
-    height:6px;
-
-    background:#A855F7;
-
-    left:80%;
-    animation-duration:16s;
     }
 
 
-    @keyframes floatParticle{
+    .wave2{
+
+    bottom:35%;
+
+    animation:
+    moveWave 35s linear infinite reverse;
+
+    }
+
+
+    @keyframes moveWave{
 
     from{
 
     transform:
-    translateY(100vh)
     translateX(0);
+
+    }
+
+    to{
+
+    transform:
+    translateX(-50%);
+
+    }
+
+    }
+
+
+    /* photovoltaic particles */
+
+    .particle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    opacity:.5;
+
+    animation:
+    floatUp linear infinite;
+
+    }
+
+    .p1{
+
+    width:8px;
+    height:8px;
+
+    background:#FFD84D;
+
+    left:10%;
+
+    animation-duration:15s;
+
+    }
+
+    .p2{
+
+    width:10px;
+    height:10px;
+
+    background:#5C7CFF;
+
+    left:30%;
+
+    animation-duration:25s;
+
+    }
+
+    .p3{
+
+    width:6px;
+    height:6px;
+
+    background:#00E5FF;
+
+    left:50%;
+
+    animation-duration:20s;
+
+    }
+
+    .p4{
+
+    width:10px;
+    height:10px;
+
+    background:#A855F7;
+
+    left:75%;
+
+    animation-duration:18s;
+
+    }
+
+    .p5{
+
+    width:7px;
+    height:7px;
+
+    background:white;
+
+    left:90%;
+
+    animation-duration:28s;
+
+    }
+
+
+    @keyframes floatUp{
+
+    from{
+
+    transform:
+    translateY(100vh);
 
     }
 
@@ -152,70 +296,55 @@
     }
 
 
-    /* spectral wave */
 
-    .wave{
+    /*=====================
 
-    position:absolute;
+    Navbar
 
-    width:200%;
-    height:150px;
+    =====================*/
 
-    bottom:0;
-
-    opacity:.15;
-
-    background:
-    repeating-radial-gradient(
-
-    circle,
-
-    #00E5FF 0px,
-    #00E5FF 2px,
-    transparent 5px,
-    transparent 40px
-
-    );
-
-    animation:
-    waveMove 25s linear infinite;
-    }
-
-    @keyframes waveMove{
-
-    from{
-
-    transform:
-    translateX(0);
-
-    }
-
-    to{
-
-    transform:
-    translateX(-50%);
-
-    }
-
-    }
-
-
-
-    /* navbar */
 
     .navbar{
 
     background:
-    rgba(5,10,20,.7)!important;
+    rgba(5,10,20,.65)!important;
 
-    backdrop-filter:blur(15px);
+    backdrop-filter:
+    blur(15px);
 
     border-bottom:
-    1px solid rgba(255,255,255,.06);
+    1px solid rgba(255,255,255,.08);
+
     }
 
 
-    /* Hero */
+    .navbar-brand{
+
+    font-weight:800;
+
+    font-size:2rem;
+
+    background:
+    linear-gradient(
+    90deg,
+    #FFD84D,
+    #5C7CFF
+    );
+
+    -webkit-background-clip:text;
+
+    color:transparent!important;
+
+    }
+
+
+
+    /*=====================
+
+    Hero
+
+    =====================*/
+
 
     .hero{
 
@@ -224,56 +353,162 @@
     display:flex;
 
     align-items:center;
+
     }
+
+
+    .hero h1{
+
+    font-size:5rem;
+
+    font-weight:800;
+
+    background:
+    linear-gradient(
+    90deg,
+    #FFD84D,
+    white,
+    #5C7CFF
+    );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    }
+
 
     .hero img{
 
     animation:
-    logoFloat 6s ease infinite;
+    floatLogo 6s ease infinite;
 
     filter:
+
     drop-shadow(
-    0 0 40px
-    rgba(92,124,255,.8)
+    0 0 35px rgba(92,124,255,.8)
     );
+
     }
 
 
-    @keyframes logoFloat{
+    @keyframes floatLogo{
 
     50%{
 
     transform:
     translateY(-20px)
-    rotateY(12deg);
+    rotateY(15deg);
 
     }
 
     }
 
 
-    /* cards */
+
+    /*=====================
+
+    Sections
+
+    =====================*/
+
+
+    section{
+
+    padding:100px 0;
+
+    position:relative;
+
+    z-index:5;
+
+    }
+
+
+    .bg-light{
+
+    background:transparent!important;
+
+    }
+
+
+    .text-dark{
+
+    color:white!important;
+
+    }
+
+
+
+    .section-title{
+
+    font-size:2.7rem;
+
+    font-weight:700;
+
+    text-align:center;
+
+    margin-bottom:70px;
+
+    position:relative;
+
+    }
+
+
+    .section-title::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:80px;
+    height:4px;
+
+    bottom:-15px;
+    left:50%;
+
+    transform:
+    translateX(-50%);
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #FFD84D,
+    #5C7CFF
+    );
+
+    }
+
+
+
+    /*=====================
+
+    Cards
+
+    =====================*/
 
     .feature-card,
     .download-card,
     .sub-section{
 
-    background:var(--glass);
+    padding:30px;
+
+    background:
+
+    rgba(255,255,255,.06)!important;
+
+    backdrop-filter:
+    blur(15px);
 
     border:
-    1px solid var(--glassBorder);
-
-    backdrop-filter:blur(25px);
-
-    padding:30px;
+    1px solid rgba(255,255,255,.08);
 
     border-radius:25px;
 
+    transition:.4s;
+
     margin-bottom:30px;
 
-    transition:.5s;
-
-    transform-style:preserve-3d;
     }
 
 
@@ -286,105 +521,58 @@
 
     box-shadow:
 
-    0 0 40px
-    rgba(92,124,255,.35);
+    0 0 40px rgba(
+    92,
+    124,
+    255,
+    .35
+    );
+
     }
 
 
-
-    /* fix invisible sections */
-
-    .bg-light{
+    .list-group-item{
 
     background:transparent!important;
-    }
-
-    .text-dark{
 
     color:white!important;
-    }
 
-    .section-title{
-
-    margin-bottom:50px;
-    text-align:center;
-    font-weight:700;
-    position:relative;
-    }
-
-    .section-title::after{
-
-    content:"";
-
-    width:80px;
-    height:4px;
-
-    background:
-    linear-gradient(
-    90deg,
-    #FFD84D,
-    #5C7CFF
-    );
-
-    position:absolute;
-
-    bottom:-10px;
-    left:50%;
-
-    transform:
-    translateX(-50%);
-    }
-
-
-
-    /* eqe special section */
-
-    .eqe-glow{
-
-    position:relative;
-    overflow:hidden;
-    }
-
-    .eqe-glow::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:250px;
-    height:250px;
-
-    background:
-
-    radial-gradient(
-    circle,
-    rgba(0,229,255,.25),
-    transparent
-    );
-
-    right:-80px;
-    top:-50px;
-
-    filter:blur(50px);
+    border-color:
+    rgba(255,255,255,.08)!important;
 
     }
 
-
-
-    /* buttons */
 
     .btn-primary,
     .btn-download{
 
     background:
+
     linear-gradient(
     90deg,
     #5C7CFF,
     #A855F7
     )!important;
 
-    border:none;
+    border:none!important;
+
     border-radius:30px;
+
+    padding:12px 25px;
+
+    font-weight:700;
+
+    }
+
+
+    .btn-primary:hover{
+
+    transform:
+    translateY(-3px);
+
+    box-shadow:
+    0 0 20px #5C7CFF;
+
     }
 
 
@@ -394,6 +582,7 @@
     rgba(0,0,0,.4);
 
     padding:50px;
+
     }
 
     </style>
@@ -650,12 +839,11 @@
     <script>
 
     document.querySelectorAll(
-    '.feature-card,.download-card,.sub-section'
-    )
-    .forEach(card=>{
+    ".feature-card,.download-card,.sub-section"
+    ).forEach(card=>{
 
     card.addEventListener(
-    'mousemove',
+    "mousemove",
     e=>{
 
     const rect=
@@ -667,11 +855,11 @@
     const y=
     e.clientY-rect.top;
 
-    const rotateY=
-    (x-rect.width/2)/18;
-
     const rotateX=
-    -(y-rect.height/2)/18;
+    -(y-rect.height/2)/15;
+
+    const rotateY=
+    (x-rect.width/2)/15;
 
     card.style.transform=
 
@@ -685,63 +873,36 @@
     });
 
     card.addEventListener(
-    'mouseleave',
+    "mouseleave",
     ()=>{
 
     card.style.transform=
-    'perspective(1000px) rotateX(0) rotateY(0)';
-    });
 
-    });
-
-
-    const spotlight=
-    document.createElement("div");
-
-    spotlight.style.cssText=`
-
-    position:fixed;
-    width:500px;
-    height:500px;
-    pointer-events:none;
-
-    background:
-    radial-gradient(
-    circle,
-    rgba(92,124,255,.15),
-    transparent
-    );
-
-    transform:translate(-50%,-50%);
-    z-index:-1;
+    `
+    perspective(1000px)
+    rotateX(0deg)
+    rotateY(0deg)
     `;
 
-    document.body.appendChild(
-    spotlight
-    );
-
-    document.addEventListener(
-    "mousemove",
-    e=>{
-
-    spotlight.style.left=
-    e.clientX+"px";
-
-    spotlight.style.top=
-    e.clientY+"px";
+    });
 
     });
 
     </script>
-</body>
-<div class="bg-animation">
+
+<div class="solar-bg">
+
+<div class="sun-glow"></div>
+
+<div class="wave wave1"></div>
+<div class="wave wave2"></div>
 
 <div class="particle p1"></div>
 <div class="particle p2"></div>
 <div class="particle p3"></div>
 <div class="particle p4"></div>
-
-<div class="wave"></div>
+<div class="particle p5"></div>
 
 </div>
+</body>
 </html>
