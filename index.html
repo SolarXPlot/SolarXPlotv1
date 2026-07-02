@@ -7,345 +7,395 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
-        :root{
 
-        --bg:#050816;
-        --bg2:#081121;
+    :root{
+    --bg:#030712;
+    --bg2:#081427;
+    --glass:rgba(255,255,255,.08);
+    --glassBorder:rgba(255,255,255,.12);
 
-        --glass:rgba(255,255,255,.06);
-        --glassBorder:rgba(255,255,255,.12);
+    --blue:#5C7CFF;
+    --purple:#A855F7;
+    --yellow:#FFD84D;
+    --cyan:#00E5FF;
+    }
 
-        --blue:#5C7CFF;
-        --purple:#A855F7;
-        --yellow:#FFD84D;
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    }
 
-        }
+    body{
 
+    font-family:'Segoe UI',sans-serif;
+    overflow-x:hidden;
+    color:white;
+    position:relative;
 
-        body{
+    background:
+    radial-gradient(
+    circle at top right,
+    rgba(255,216,77,.18),
+    transparent 30%
+    ),
 
-        font-family:'Segoe UI',sans-serif;
+    radial-gradient(
+    circle at bottom left,
+    rgba(92,124,255,.15),
+    transparent 30%
+    ),
 
-        background:
-        linear-gradient(
-        180deg,
-        #050816,
-        #071126,
-        #0b1122
-        );
+    linear-gradient(
+    180deg,
+    #030712,
+    #081427,
+    #091A2D
+    );
 
-        color:white;
+    }
 
-        overflow-x:hidden;
 
-        position:relative;
-        }
+    /* animated background container */
 
+    .bg-animation{
 
-        /* Background effects */
+    position:fixed;
+    top:0;
+    left:0;
 
-        body::before{
+    width:100%;
+    height:100%;
 
-        content:"";
+    overflow:hidden;
 
-        position:fixed;
+    z-index:-2;
+    pointer-events:none;
+    }
 
-        width:450px;
-        height:450px;
 
-        right:-100px;
-        top:-50px;
+    /* floating photovoltaic particles */
 
-        border-radius:50%;
+    .particle{
 
-        background:
-        radial-gradient(
-        circle,
-        rgba(255,216,77,.9),
-        rgba(255,153,0,.2),
-        transparent
-        );
+    position:absolute;
+    border-radius:50%;
+    opacity:.5;
 
-        filter:blur(60px);
+    animation:
+    floatParticle linear infinite;
+    }
 
-        z-index:-3;
+    .p1{
 
-        animation:sunPulse 5s infinite;
-        }
+    width:10px;
+    height:10px;
 
+    background:#FFD84D;
 
-        body::after{
+    left:10%;
+    animation-duration:18s;
+    }
 
-        content:"";
+    .p2{
 
-        position:fixed;
+    width:8px;
+    height:8px;
 
-        width:500px;
-        height:500px;
+    background:#5C7CFF;
 
-        left:-150px;
-        bottom:-100px;
+    left:35%;
+    animation-duration:25s;
+    }
 
-        border-radius:50%;
+    .p3{
 
-        background:
-        radial-gradient(
-        circle,
-        rgba(92,124,255,.5),
-        transparent
-        );
+    width:14px;
+    height:14px;
 
-        filter:blur(90px);
+    background:#00E5FF;
 
-        z-index:-3;
-        }
+    left:60%;
+    animation-duration:20s;
+    }
 
+    .p4{
 
-        @keyframes sunPulse{
+    width:6px;
+    height:6px;
 
-        50%{
+    background:#A855F7;
 
-        transform:
-        scale(1.1);
+    left:80%;
+    animation-duration:16s;
+    }
 
-        }
 
-        }
+    @keyframes floatParticle{
 
+    from{
 
-        /* Navbar */
+    transform:
+    translateY(100vh)
+    translateX(0);
 
-        .navbar{
+    }
 
-        background:
-        rgba(10,10,25,.5)!important;
+    to{
 
-        backdrop-filter:blur(18px);
+    transform:
+    translateY(-100px)
+    translateX(100px);
 
-        border-bottom:
-        1px solid rgba(255,255,255,.08);
-        }
+    }
 
+    }
 
-        .navbar-brand{
 
-        font-weight:800;
+    /* spectral wave */
 
-        background:
-        linear-gradient(
-        90deg,
-        #FFD84D,
-        #5C7CFF
-        );
+    .wave{
 
-        -webkit-background-clip:text;
+    position:absolute;
 
-        color:transparent!important;
-        }
+    width:200%;
+    height:150px;
 
+    bottom:0;
 
-        .nav-link{
+    opacity:.15;
 
-        color:white!important;
-        }
+    background:
+    repeating-radial-gradient(
 
-        .nav-link:hover{
+    circle,
 
-        color:#FFD84D!important;
-        }
+    #00E5FF 0px,
+    #00E5FF 2px,
+    transparent 5px,
+    transparent 40px
 
+    );
 
-        /* Hero */
+    animation:
+    waveMove 25s linear infinite;
+    }
 
-        .hero{
+    @keyframes waveMove{
 
-        background:transparent!important;
+    from{
 
-        min-height:100vh;
+    transform:
+    translateX(0);
 
-        display:flex;
+    }
 
-        align-items:center;
-        }
+    to{
 
+    transform:
+    translateX(-50%);
 
-        .hero h1{
+    }
 
-        font-size:4rem;
-        font-weight:800;
+    }
 
-        background:
-        linear-gradient(
-        90deg,
-        #FFD84D,
-        #5C7CFF,
-        #A855F7
-        );
 
-        -webkit-background-clip:text;
 
-        color:transparent;
-        }
+    /* navbar */
 
+    .navbar{
 
-        .hero img{
+    background:
+    rgba(5,10,20,.7)!important;
 
-        animation:floatLogo 5s ease infinite;
+    backdrop-filter:blur(15px);
 
-        filter:
-        drop-shadow(
-        0 0 30px rgba(92,124,255,.8)
-        );
-        }
+    border-bottom:
+    1px solid rgba(255,255,255,.06);
+    }
 
 
-        @keyframes floatLogo{
+    /* Hero */
 
-        50%{
+    .hero{
 
-        transform:
-        translateY(-20px)
-        rotateY(10deg);
+    min-height:100vh;
 
-        }
+    display:flex;
 
-        }
+    align-items:center;
+    }
 
+    .hero img{
 
-        /* Feature cards */
+    animation:
+    logoFloat 6s ease infinite;
 
-        .feature-card,
-        .download-card,
-        .sub-section{
+    filter:
+    drop-shadow(
+    0 0 40px
+    rgba(92,124,255,.8)
+    );
+    }
 
-        background:var(--glass)!important;
 
-        border:
+    @keyframes logoFloat{
 
-        1px solid var(--glassBorder);
+    50%{
 
-        backdrop-filter:blur(20px);
+    transform:
+    translateY(-20px)
+    rotateY(12deg);
 
-        border-radius:25px!important;
+    }
 
-        transition:.5s;
+    }
 
-        transform-style:preserve-3d;
 
-        overflow:hidden;
+    /* cards */
 
-        color:white;
-        }
+    .feature-card,
+    .download-card,
+    .sub-section{
 
+    background:var(--glass);
 
-        .feature-card:hover,
-        .download-card:hover,
-        .sub-section:hover{
+    border:
+    1px solid var(--glassBorder);
 
-        transform:
-        perspective(1000px)
-        translateY(-10px);
+    backdrop-filter:blur(25px);
 
-        box-shadow:
+    padding:30px;
 
-        0 0 35px rgba(
-        92,
-        124,
-        255,
-        .3
-        );
+    border-radius:25px;
 
-        }
+    margin-bottom:30px;
 
+    transition:.5s;
 
-        /* icon */
+    transform-style:preserve-3d;
+    }
 
-        .feature-icon,
-        .download-icon{
 
-        color:#FFD84D!important;
-        }
+    .feature-card:hover,
+    .download-card:hover,
+    .sub-section:hover{
 
+    transform:
+    translateY(-10px);
 
-        /* lists */
+    box-shadow:
 
-        .list-group-item{
+    0 0 40px
+    rgba(92,124,255,.35);
+    }
 
-        background:transparent!important;
 
-        color:white!important;
 
-        border-color:
-        rgba(255,255,255,.08)!important;
-        }
+    /* fix invisible sections */
 
+    .bg-light{
 
-        /* section */
+    background:transparent!important;
+    }
 
-        .section-title{
+    .text-dark{
 
-        color:white;
-        }
+    color:white!important;
+    }
 
-        .section-title::after{
+    .section-title{
 
-        background:
-        linear-gradient(
-        90deg,
-        #FFD84D,
-        #5C7CFF
-        );
-        }
+    margin-bottom:50px;
+    text-align:center;
+    font-weight:700;
+    position:relative;
+    }
 
+    .section-title::after{
 
-        /* buttons */
+    content:"";
 
-        .btn-download,
-        .btn-primary{
+    width:80px;
+    height:4px;
 
-        background:
-        linear-gradient(
-        90deg,
-        #5C7CFF,
-        #A855F7
-        )!important;
+    background:
+    linear-gradient(
+    90deg,
+    #FFD84D,
+    #5C7CFF
+    );
 
-        border:none!important;
+    position:absolute;
 
-        border-radius:30px;
+    bottom:-10px;
+    left:50%;
 
-        font-weight:700;
-        }
+    transform:
+    translateX(-50%);
+    }
 
 
-        .btn-download:hover,
-        .btn-primary:hover{
 
-        transform:
-        translateY(-3px);
+    /* eqe special section */
 
-        box-shadow:
-        0 0 20px #5C7CFF;
-        }
+    .eqe-glow{
 
+    position:relative;
+    overflow:hidden;
+    }
 
-        .btn-outline-primary{
+    .eqe-glow::before{
 
-        border-color:#5C7CFF!important;
-        color:white!important;
-        }
+    content:"";
 
+    position:absolute;
 
-        /* footer */
+    width:250px;
+    height:250px;
 
-        footer{
+    background:
 
-        background:
-        rgba(0,0,0,.4)!important;
+    radial-gradient(
+    circle,
+    rgba(0,229,255,.25),
+    transparent
+    );
 
-        border-top:
-        1px solid rgba(255,255,255,.1);
-        }
+    right:-80px;
+    top:-50px;
+
+    filter:blur(50px);
+
+    }
+
+
+
+    /* buttons */
+
+    .btn-primary,
+    .btn-download{
+
+    background:
+    linear-gradient(
+    90deg,
+    #5C7CFF,
+    #A855F7
+    )!important;
+
+    border:none;
+    border-radius:30px;
+    }
+
+
+    footer{
+
+    background:
+    rgba(0,0,0,.4);
+
+    padding:50px;
+    }
+
     </style>
 </head>
 <body>
@@ -557,7 +607,7 @@
                         <li class="list-group-item bg-transparent">Current density integration</li>
                     </ul>
                 </div>
-                <div class="col-md-6 order-md-1">
+                <div class="col-md-6">
                     <img src="EQE Plot-solarxplot.png" alt="EQE Analysis" class="img-fluid rounded shadow">
                 </div>
             </div>
@@ -601,7 +651,8 @@
 
     document.querySelectorAll(
     '.feature-card,.download-card,.sub-section'
-    ).forEach(card=>{
+    )
+    .forEach(card=>{
 
     card.addEventListener(
     'mousemove',
@@ -617,10 +668,10 @@
     e.clientY-rect.top;
 
     const rotateY=
-    (x-rect.width/2)/15;
+    (x-rect.width/2)/18;
 
     const rotateX=
-    -(y-rect.height/2)/15;
+    -(y-rect.height/2)/18;
 
     card.style.transform=
 
@@ -628,30 +679,21 @@
     perspective(1000px)
     rotateX(${rotateX}deg)
     rotateY(${rotateY}deg)
-    scale(1.02)
+    scale(1.03)
     `;
 
     });
-
 
     card.addEventListener(
     'mouseleave',
     ()=>{
 
     card.style.transform=
-
-    `
-    perspective(1000px)
-    rotateX(0deg)
-    rotateY(0deg)
-    `;
-
+    'perspective(1000px) rotateX(0) rotateY(0)';
     });
 
     });
 
-
-    /* spotlight effect */
 
     const spotlight=
     document.createElement("div");
@@ -659,8 +701,8 @@
     spotlight.style.cssText=`
 
     position:fixed;
-    width:400px;
-    height:400px;
+    width:500px;
+    height:500px;
     pointer-events:none;
 
     background:
@@ -670,9 +712,7 @@
     transparent
     );
 
-    transform:
-    translate(-50%,-50%);
-
+    transform:translate(-50%,-50%);
     z-index:-1;
     `;
 
@@ -694,4 +734,14 @@
 
     </script>
 </body>
+<div class="bg-animation">
+
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+
+<div class="wave"></div>
+
+</div>
 </html>
